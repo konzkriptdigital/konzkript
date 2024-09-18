@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Mail\OtpLoginMail;
+use App\Models\Company;
 use App\Models\User;
 use App\Models\verificationCode;
 use Carbon\Carbon;
@@ -31,8 +32,14 @@ class CustomLoginForm extends Form
 
         // Verify if user already exist
         if(!$user) {
+            $company = Company::create([
+                'name' => substr($this->email, 0, strpos($this->email, '@')),
+                'email' => $this->email
+            ]);
+
             $user = User::create([
                 'name' => substr($this->email, 0, strpos($this->email, '@')),
+                'company_id' => $company->id,
                 'email' => $this->email,
                 'otp_secret' => $otp,
                 'otp_secret_expires_at' => Carbon::now()->addMinutes(5),
@@ -49,8 +56,6 @@ class CustomLoginForm extends Form
         }
 
         Mail::to($user->email)->send(new OtpLoginMail($otp, $user->email));
-
-        // $this->resendCode($user);
     }
 
     // Updating User's OTP Code

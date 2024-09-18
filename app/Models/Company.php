@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Paddle\Billable;
 
 class Company extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, Billable, HasUuids;
 
     protected $guarded = ['id'];
 
@@ -26,13 +27,13 @@ class Company extends Model
     ];
 
     /**
-     * Get the user that owns the Company
+     * Get all of the users for the Company
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function user(): BelongsTo
+    public function users(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 
     /**

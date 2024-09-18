@@ -18,7 +18,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->form->customAuthenticationEmailOnly();
 
-        Session::regenerate();
+        // Session::regenerate();
 
         $this->redirect(route('verify.code', ['email' => $this->form->email]));
         // $this->redirectIntended(default: route('verify.code', ['email' => $this->form->email], absolute: false), navigate: true);

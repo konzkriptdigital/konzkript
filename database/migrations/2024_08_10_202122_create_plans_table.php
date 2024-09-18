@@ -14,16 +14,24 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('planId');
+            $table->string('product_id')->nullable();
+            $table->string('plan_id')->nullable();
             $table->string('slug')->nullable();
             $table->text('features')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('monthly_price', 8, 2)->nullable();  // Monthly subscription price
+            $table->string('monthly_price_id')->nullable();  // Paddle or payment provider ID for monthly pricing
+            $table->decimal('annual_price', 8, 2)->nullable();   // Annual subscription price
+            $table->string('annual_price_id')->nullable();   // Paddle or payment provider ID for annual pricing
+            $table->decimal('one_time_price', 8, 2)->nullable();  // One-time payment price (for lifetime plans)
             $table->tinyInteger('role_id')->default(1);
-            $table->boolean('is_free')->default(1);
-            $table->boolean('is_trial')->default(1);
+            $table->boolean('is_free')->default(0);
+            $table->boolean('is_trial')->default(0);
             $table->boolean('is_active')->default(1);
             $table->integer('trial_days')->default(0);
+            $table->integer('max_accounts')->nullable();
+            $table->enum('billing_cycle', ['monthly', 'annual', 'lifetime'])->nullable();
+            $table->boolean('is_one_time')->default(0);
             $table->timestamps();
         });
     }

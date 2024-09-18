@@ -23,7 +23,7 @@
         <div class="relative z-10 flex flex-row h-screen">
             @auth
                 <livewire:layout.sidebar />
-                @if (!Route::is('setting.checkout'))
+                @if (!Route::is('settings.checkout'))
                 <livewire:layout.setting-sidebar />
                 @endif
             @endauth

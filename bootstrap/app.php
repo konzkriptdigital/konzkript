@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
             'paddle/*',
+            'livewire/update',
+        ]);
+        $middleware->alias([
+            'ghlScript' => \App\Http\Middleware\GhlScript::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

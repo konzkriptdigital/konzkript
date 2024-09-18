@@ -13,13 +13,9 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-
-            $table->string('ghl_id');
+            $table->string('ghl_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
             $table->json('data')->nullable();
 
             $table->text('access_token')->nullable();

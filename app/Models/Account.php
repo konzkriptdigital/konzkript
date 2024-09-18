@@ -36,4 +36,10 @@ class Account extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'account_users', 'account_id', 'user_id')
+            ->withTimestamps();
+    }
 }

@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 
-#[Layout('layouts.setting')]
+#[Layout('layouts.app')]
 class Checkout extends Component
 {
     public Plan $plan;
@@ -26,7 +26,7 @@ class Checkout extends Component
         // dd(auth()->user()->subscribe($this->plan->plan_id));
         // dd(auth()->user()->checkout("pri_01j4y56rbha1mrxrmd9qba3ryb"));
         return view('livewire.pages.checkout', [
-            'checkout' => auth()->user()->subscribe($this->plan->plan_id, 'default')
+            'checkout' => auth()->user()->subscribe('pri_01j7qtzy38nz08yzqw7vzj042v', 'default')
         ]);
     }
 }

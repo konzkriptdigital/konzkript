@@ -1,6 +1,7 @@
+
 #gradient-canvas {
-    width: 100%;
-    height: 100vh;
+    width: 100% !important;
+    height: 100% !important;
     display: block;
     --gradient-color-1: #c3e4ff;
     --gradient-color-2: #FFFFFF;
@@ -150,7 +151,7 @@
     font-size: 24px;
     font-weight: 600;
     justify-content: center;
-    overflow: hidden;
+    padding: 10px;
 }
 
 .account--profile > img {
@@ -235,4 +236,63 @@ a.nav--item.active span, a.nav--item:hover span {font-weight: 600;}
 }
 .text-slate-900\/\[0\.045\] {
     color: #0f172a0b;
+}
+.container-fluid {
+    flex-grow: 1;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.drawer-toggle:checked ~ .drawer-side > *:not(.drawer-overlay) > div{
+    display: flex;
+}
+.glass--effect {
+    background-color: rgb(255 255 255 / 0.6) !important;
+    isolation: isolate;
+}
+.card {
+    flex-direction: column;
+    /* box-shadow: 0px 3px 4px 0px #f1f1f4; */
+    background-color: #fff;
+    border-radius: .75rem;
+    border: 1px solid #f1f1f4;
+}
+.card-header {
+    display: flex;
+    min-height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f1f1f4;
+    padding: .75rem 1.875rem;
+}
+
+
+
+
+
+.scrollable-x-auto {
+    overflow-x: auto
+}
+
+.scrollable,.scrollable-auto,.scrollable-hover:hover,.scrollable-x,.scrollable-x-auto,.scrollable-x-hover:hover,.scrollable-y,.scrollable-y-auto,.scrollable-y-hover:hover {
+    scrollbar-color: var(--tw-scrollbar-thumb-color,#f1f1f4) transparent
+}
+
+.scrollable-auto::-webkit-scrollbar-thumb,.scrollable-hover:hover::-webkit-scrollbar-thumb,.scrollable-x-auto::-webkit-scrollbar-thumb,.scrollable-x-hover:hover::-webkit-scrollbar-thumb,.scrollable-x::-webkit-scrollbar-thumb,.scrollable-y-auto::-webkit-scrollbar-thumb,.scrollable-y-hover:hover::-webkit-scrollbar-thumb,.scrollable-y::-webkit-scrollbar-thumb,.scrollable::-webkit-scrollbar-thumb {
+    background-color: var(--tw-scrollbar-thumb-color,#f1f1f4)
+}
+
+.container-fixed {
+    flex-grow: 1;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
+}
+
+@media (min-width: 1280px) {
+    .container-fixed {
+        margin-left:auto;
+        margin-right: auto;
+        padding-left: 1.875rem;
+        padding-right: 1.875rem;
+        max-width: 1280px
+    }
 }

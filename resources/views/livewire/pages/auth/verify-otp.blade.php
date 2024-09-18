@@ -61,7 +61,9 @@ new #[Layout('layouts.guest')] class extends Component
                     $this->user->email_verified_at = Carbon::now();
                     $this->user->save();
                     Auth::login($this->user);
-                    $this->redirectIntended('dashboard');
+                    // $this->errorMessage = Auth::check();
+                    Session::regenerate();
+                    $this->redirect('dashboard');
                 }
                 else {
                     $this->errorMessage = "The code is invalid or has been used";

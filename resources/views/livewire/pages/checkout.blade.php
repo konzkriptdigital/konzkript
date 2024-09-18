@@ -1,9 +1,8 @@
 <div class="flex flex-col flex-auto h-full overflow-hidden lg:flex-row bg-[#F8FAFC]">
-    <div class="absolute inset-x-0 top-0 overflow-hidden pl-[50%] lg:left-[32rem] lg:pl-0 xl:left-[34rem] ">
-        <img
-            src="{{ asset('images/checkoutbg.jpg') }}" alt=""
-            class="-ml-[48rem] w-[124.125rem] max-w-none lg:-ml-[32rem] "><svg
-            class="absolute inset-0 w-full text-slate-900/[0.045] [mask-image:linear-gradient(to_bottom,white,transparent)]"
+    <div class="absolute inset-x-0 top-0 overflow-hidden pl-[50%] lg:left-[32rem] lg:pl-0 xl:left-[34rem] h-full">
+        <img src="{{ asset('images/checkoutbg.jpg') }}" alt=""
+            class="-ml-[48rem] w-[124.125rem] max-w-none lg:-ml-[32rem] h-full ">
+        <svg class="absolute inset-0 w-full text-slate-900/[0.045] [mask-image:linear-gradient(to_bottom,white,transparent)] h-full"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <pattern id="grid-pattern" width="32" height="32" patternUnits="userSpaceOnUse" x="50%">
@@ -11,7 +10,8 @@
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid-pattern)"></rect>
-        </svg></div>
+        </svg>
+    </div>
     <div class="px-4 lg:order-2 lg:min-w-0 lg:flex-1 lg:px-16 xl:px-20">
         <div class="grid max-w-md grid-cols-1 mx-auto lg:mx-0 lg:max-w-lg">
             <div class="relative py-10 lg:pt-24">
@@ -43,7 +43,7 @@
                     <p class="mt-6 text-base leading-7 text-slate-700">Includes access to all 500+ components and
                         templates available in Tailwind UI today, plus all future updates.</p>
                     <p class="mt-6 text-sm leading-6 text-slate-600">All prices in USD</p>
-                    <dl class="hidden mt-16 text-base leading-6 divide-y divide-slate-900/5 text-slate-700 lg:block">
+                    <dl class="hidden mt-16 text-base leading-6 text-slate-700 lg:block">
                         <div class="flex justify-between pb-4">
                             <dt>Subtotal</dt>
                             <dd class="font-semibold text-slate-900">
@@ -77,25 +77,24 @@
                     fill="currentColor"></path>
             </svg></a>
         <ul class="hidden mt-8 space-x-2 text-sm font-medium leading-6 text-slate-700 lg:flex">
-            <li class="flex"><a href="/all-access">Packages</a><svg aria-hidden="true"
+            <li class="flex"><a href="{{ route('settings.billing') }}">Billing</a><svg aria-hidden="true"
                     class="w-6 h-6 ml-2 stroke-slate-500/40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="m10.75 8.75 3.5 3.25-3.5 3.25" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round"></path>
                 </svg></li>
-            <li class="flex font-semibold text-sky-500">Your details<svg aria-hidden="true"
+            <li class="flex font-semibold text-sky-500">Your details
+                {{-- <svg aria-hidden="true"
                     class="w-6 h-6 ml-2 stroke-slate-500/40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="m10.75 8.75 3.5 3.25-3.5 3.25" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round"></path>
-                </svg></li>
-            <li class="">Payment</li>
+                </svg> --}}
+            </li>
+            {{-- <li class="">Payment</li> --}}
         </ul>
         <section class="max-w-md mx-auto lg:mt-12 lg:max-w-sm ">
             <div>
                 <div class="-m-[13px]">
                     <div class="paddle-checkout-container">
-                        {{ $this->user->subscriptions }}
-
-                        {{-- {{ $checkout }} --}}
                         <x-paddle-checkout :checkout="$checkout" class="w-full" height="500" />
                     </div>
                 </div>

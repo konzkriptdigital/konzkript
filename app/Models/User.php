@@ -5,14 +5,15 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Paddle\Billable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Billable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -54,16 +55,39 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'data' => 'json',
         ];
     }
 
     /**
-     * Get the company associated with the User
+     * Get the company that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /* public function accounts()
+    {
+        return $this->belongsToMany(Account::class, 'account_users', 'user_id', 'account_id')
+            ->withTimestamps();;
+    } */
+
+    /**
+     * Get the status associated with the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function company(): HasOne
+    public function status(): HasOne
     {
-        return $this->hasOne(Company::class);
+        return $this->hasOne(UserStatus::class);
+    }
+
+    public function accounts()
+    {
+        return $this->belongsToMany(Account::class, 'account_users')
+            ->withTimestamps();
     }
 }

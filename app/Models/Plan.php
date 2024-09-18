@@ -11,4 +11,9 @@ class Plan extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

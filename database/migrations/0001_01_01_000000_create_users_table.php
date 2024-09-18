@@ -13,22 +13,36 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->uuid('company_id');
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onDelete('cascade');
+
+            $table->string('ghl_id')->nullable()->unique();
+
             $table->string('name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->longText('avatar')->nullable();
             $table->string('otp_secret')->nullable();
             $table->timestamp('otp_secret_expires_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+
+            $table->string('user_type')->default('app');
+            $table->string('role')->default('owner');
+            $table->json('data')->nullable();
+
 
             $table->string('facebook_id')->nullable();
             $table->string('google_id')->nullable();
             $table->tinyInteger('is_finish')->nullable();
+            $table->rememberToken();
 
             $table->timestamps();
+            $table->softDeletes(); // This adds the `deleted_at` column
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

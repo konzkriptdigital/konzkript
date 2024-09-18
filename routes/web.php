@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GhlController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\PaddleController;
+use App\Livewire\Pages\Billing;
 use App\Livewire\Pages\Checkout;
+use App\Livewire\Pages\Editor;
 use App\Livewire\Pages\Pricing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,22 +39,44 @@ Route::get('auth/google/callback', [GoogleController::class, 'googleCallback'])
 Volt::route('setting/pricing', 'pages.pricing')
     ->middleware(['auth', 'verified'])
     ->name('pricing'); */
-Route::get('setting/pricing', Pricing::class)
-    ->middleware(['auth', 'verified'])
-    ->name('setting.pricing');
-
-
-Route::get('setting/checkout/{plan}', Checkout::class)
-    ->middleware(['auth', 'verified'])
-    ->name('setting.checkout');
 
 
 Route::get('/test', function (Request $request) {
     $checkout = $request->user()->subscribe('pri_01j4y51q2y31y5aepd313n4nae','default');
-
     return view('livewire.test', ['checkout' => $checkout]);
 })->name('test');
 
+
+Route::get('client/script/{company}', [CompanyController::class, 'script'])
+    // ->middleware('ghlScript')
+    ->name('script');
+
+
+Route::get('editor/{company}', Editor::class)
+    ->name('editor');
+/* Route::get('editor', function (Request $request) {
+    return view('livewire.pages.editor');
+})
+
+->name('main.editor'); */
+    // ->middleware('ghlScript')
+
+Route::prefix('settings')->group(function () {
+    Route::get('billing', Billing::class)
+        ->name('settings.billing');
+
+    Route::get('pricing', Pricing::class)
+        ->name('settings.pricing')
+        ->middleware(['auth', 'verified']);
+
+
+    Route::get('checkout/{plan}', Checkout::class)
+        ->name('settings.checkout');
+})->middleware(['auth', 'verified']);
+
+
+Volt::route('user-list/{company}/{user}', 'components.widgets.user-list')
+    ->name('widget.user-list');
 
 // Route::post('paddle/webhook', [PaddleController::class, 'webhook']);
 

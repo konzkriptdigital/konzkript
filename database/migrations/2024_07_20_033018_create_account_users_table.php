@@ -12,23 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('account_users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-
-            $table->uuid('company_id');
-            $table->foreign('company_id')
+            $table->uuid('user_id');
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('companies')
+                ->on('users')
                 ->onDelete('cascade');
 
-            $table->uuid('account_id')->nullable();
+            $table->uuid('account_id');
             $table->foreign('account_id')
                 ->references('id')
                 ->on('accounts')
                 ->onDelete('cascade');
-
-            $table->string('ghl_id')->nullable();
-            $table->json('data')->nullable();
-            $table->tinyInteger('is_active')->default(0);
             $table->timestamps();
         });
     }

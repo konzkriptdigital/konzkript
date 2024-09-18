@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('plans', function (Blueprint $table) {
             $table->tinyInteger('is_featured')->default(0);
-            $table->renameColumn('planId', 'plan_id');
         });
     }
 
